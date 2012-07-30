@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * Implementation of hook_services_authentication().
+ */
+function services_basic_auth_services_authentication_info() {
+  return array(
+    'file'             => 'services_basic_auth.inc',
+    'title'            => t('HTTP basic authentication'),
+    'description'      => t('Username and password are sent in each request'),
+    'authenticate_call' => '_services_basic_auth_authenticate_call',
+  );
+}
