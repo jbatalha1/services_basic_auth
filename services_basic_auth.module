@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Module file for services_basic_auth module.
+ */
+
+/**
  * Implementation of hook_services_authentication().
  */
 function services_basic_auth_services_authentication_info() {
