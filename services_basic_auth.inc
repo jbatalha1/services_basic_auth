@@ -9,13 +9,14 @@
  * Authenticates a call using HTTP basic authentication to verify the request.
  *
  * @param array $settings
-  *  The settings for the authentication module.
+ *   The settings for the authentication module.
  * @param array $method
- *  The method that's being called
+ *   The method that's being called.
  * @param array $args
- *  The arguments that are being used to call the method
+ *   The arguments that are being used to call the method.
+ *
  * @return void|string
- *  Returns nothing, or a error message if authentication fails
+ *   Returns nothing, or a error message if authentication fails.
  */
 function _services_basic_auth_authenticate_call($settings, $method, $args) {
   if (user_is_anonymous() && isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
