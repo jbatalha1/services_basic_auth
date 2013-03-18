@@ -27,18 +27,13 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
   }
 
   if (user_is_anonymous() && isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-    $form_state = array();
-    $form_state['values']['name'] = $_SERVER['PHP_AUTH_USER'];
-    $form_state['values']['pass'] = $_SERVER['PHP_AUTH_PW'];
-    drupal_form_submit('user_login', $form_state);
-    if (!user_is_anonymous()) {
-      drupal_static_reset();
-    }
-    else {
-      // Clear the login form error and remove the login failure message.
-      $form = &drupal_static('form_set_error', array());
-      $form = array();
-      drupal_get_messages();
+    if($uid = user_authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+      global $user;
+      $user = user_load($uid);
+
+      //No session is opened so Drupal may cache the results if caching is enabled
+      //Manually disable caching for this request
+      $GLOBALS['conf']['cache'] = FALSE;
     }
   }
 }
