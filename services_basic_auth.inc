@@ -19,6 +19,10 @@
  *   Returns nothing, or a error message if authentication fails.
  */
 function _services_basic_auth_authenticate_call($settings, $method, $args) {
+  // Disable page caching for any request that requires an authentication
+  // check.
+  drupal_page_is_cacheable(FALSE);
+
   // PHP FastCGI doesn't support HTTP Basic Authentication out of the box so we
   // need this workaround. Requires a patch to .htaccess.
   // @see http://drupal.org/node/1864628.
@@ -30,10 +34,6 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
     if($uid = user_authenticate($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
       global $user;
       $user = user_load($uid);
-
-      //No session is opened so Drupal may cache the results if caching is enabled
-      //Manually disable caching for this request
-      $GLOBALS['conf']['cache'] = FALSE;
     }
   }
 }
