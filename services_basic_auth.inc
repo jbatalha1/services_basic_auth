@@ -48,6 +48,7 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
       if (isset($form_state['flood_control_user_identifier'])) {
         flood_register_event('failed_login_attempt_user', variable_get('user_failed_login_user_window', 21600), $form_state['flood_control_user_identifier']);
       }
+      return 'Invalid credentials.';
     }
     elseif (isset($form_state['flood_control_user_identifier'])) {
       // Clear past failures for this user so as not to block a user who might
@@ -58,6 +59,10 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
       // log them in. @see user_login_submit().
       global $user;
       $user = user_load($form_state['uid']);
+    }
+    else {
+      // This situation *shouldn't* occur.
+      return 'An unknown error occurred.';
     }
   }
 }
