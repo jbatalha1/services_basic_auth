@@ -27,7 +27,12 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
   // need this workaround. Requires a patch to .htaccess.
   // @see http://drupal.org/node/1864628.
   if (isset($_SERVER['HTTP_AUTHORIZATION']) AND !empty($_SERVER['HTTP_AUTHORIZATION'])) {
-    list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)), 2);
+    $credentials = base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6));
+    if (empty($credentials)) {
+      // The string is too short or is not correctly Base64 encoded.
+      return 'Malformed HTTP Authorization header.';
+    }
+    list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', $credentials, 2);
   }
 
   if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
