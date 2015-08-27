@@ -30,7 +30,7 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
     list($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6)), 2);
   }
 
-  if (user_is_anonymous() && isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+  if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
     // Fake a user_login form submission.
     $form_state['values'] = array(
       'name' => $_SERVER['PHP_AUTH_USER'],
