@@ -8,6 +8,10 @@ plain-text and so represent a security weakness. We strongly recommend
 using secure (https) traffic for all requests which make use of this
 authentication mechanism.
 
+Reference links:
+http://tools.ietf.org/html/rfc2617
+https://en.wikipedia.org/wiki/Basic_access_authentication
+
 
 Installation
 ------------
