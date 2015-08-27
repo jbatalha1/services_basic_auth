@@ -3,6 +3,11 @@ Services Basic Authentication
 
 This module adds HTTP basic authentication to the Services module.
 
+*WARNING* HTTP basic authentication username and password are sent as
+plain-text and so represent a security weakness. We strongly recommend
+using secure (https) traffic for all requests which make use of this
+authentication mechanism.
+
 
 Installation
 ------------
