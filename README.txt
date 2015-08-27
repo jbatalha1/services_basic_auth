@@ -16,6 +16,22 @@ Unpack the module and place the services_basic_auth folder in your site's
 module directory (e.g. sites/all/modules).
 
 
+Configuration
+-------------
+
+There is no module configuration required, however you will need to enable the
+basic authentication provider for each of the services which require basic
+authentication, as follows:
+ * 1. Enable this module.
+ * 2. Visit the services configuration page at:
+   http://example.com/admin/structure/services
+ * 3. Select the Edit operation for the services endpoint you would like to add
+   basic authentication to.
+ * 4. Tick the 'HTTP basic authentication' option in the Authentication
+   section.
+ * 5. Save the endpoint configuration.
+
+
 CGI/FastCGI compatibility
 -------------------------
 
