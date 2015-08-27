@@ -9,6 +9,7 @@ using secure (https) traffic for all requests which make use of this
 authentication mechanism.
 
 Reference links:
+
 http://tools.ietf.org/html/rfc2617
 https://en.wikipedia.org/wiki/Basic_access_authentication
 
@@ -72,7 +73,8 @@ string and applying base64 encoding.
 
    <?php
    $client = new GuzzleHttp\Client(['base_url' => 'https://example.com']);
-   $response = $client->get('/get', ['auth' => ['username', 'password']]);
+   $response = $client->get('/endpoint/node.json', ['auth' => ['username', 'password']]);
+   ?>
 
 
 See also:
