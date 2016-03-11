@@ -26,11 +26,12 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
   // PHP FastCGI doesn't support HTTP Basic Authentication out of the box so we
   // need this workaround. Requires a patch to .htaccess.
   // @see http://drupal.org/node/1864628.
-  if (isset($_SERVER['HTTP_AUTHORIZATION'])
-      && !empty($_SERVER['HTTP_AUTHORIZATION'])
-      && strtolower(substr($_SERVER['HTTP_AUTHORIZATION'], 0, 5)) == 'basic') {
+  $fastcgi_header = variable_get('services_basic_auth_fastcgi_header', 'HTTP_AUTHORIZATION');
+  if (isset($_SERVER[$fastcgi_header])
+      && !empty($_SERVER[$fastcgi_header])
+      && strtolower(substr($_SERVER[$fastcgi_header], 0, 5)) == 'basic') {
 
-    $credentials = base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6));
+    $credentials = base64_decode(substr($_SERVER[$fastcgi_header], 6));
     if (empty($credentials)) {
       // The string is too short or is not correctly Base64 encoded.
       return 'Malformed HTTP Authorization header.';

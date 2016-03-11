@@ -91,3 +91,9 @@ You can either apply the included patch "htaccess-fastcgi.patch" or add the
 following rewrite rule to your .htaccess file manually:
 
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+By default the HTTP_AUTHORIZATION header is used by this module. In some cases
+Apache will use a different header e.g. REDIRECT_HTTP_AUTHORIZATION. You can
+configure which header should be used in settings.php:
+
+  $conf['services_basic_auth_fastcgi_header'] = 'REDIRECT_HTTP_AUTHORIZATION';
