@@ -28,7 +28,7 @@ function _services_basic_auth_authenticate_call($settings, $method, $args) {
   // @see http://drupal.org/node/1864628.
   if (isset($_SERVER['HTTP_AUTHORIZATION'])
       && !empty($_SERVER['HTTP_AUTHORIZATION'])
-      && strtolower(substr($_SERVER['HTTP_AUTHORIZATION']), 0, 5) == 'basic') {
+      && strtolower(substr($_SERVER['HTTP_AUTHORIZATION'], 0, 5)) == 'basic') {
 
     $credentials = base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 6));
     if (empty($credentials)) {
