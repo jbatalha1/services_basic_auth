@@ -1,6 +1,6 @@
 name = Services basic authentication
 description = Provides HTTP basic authentication for the services module
-core = 7.x
+backdrop = 1.x
 
 package = Services - authentication
 

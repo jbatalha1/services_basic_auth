@@ -21,7 +21,7 @@
 function _services_basic_auth_authenticate_call($settings, $method, $args) {
   // Disable page caching for any request that requires an authentication
   // check.
-  drupal_page_is_cacheable(FALSE);
+  backdrop_page_is_cacheable(FALSE);
 
   // PHP FastCGI doesn't support HTTP Basic Authentication out of the box so we
   // need this workaround. Requires a patch to .htaccess.

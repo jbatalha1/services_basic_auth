@@ -29,7 +29,7 @@ function services_basic_auth_services_authentication_info() {
  */
 function services_basic_auth_rest_server_execute_errors_alter(&$error, $controller, $arguments) {
   if ($error['code'] == 401) {
-    drupal_add_http_header('WWW-Authenticate', 'Basic realm="' . check_plain(variable_get('site_name'), 'Drupal') . '"');
+    backdrop_add_http_header('WWW-Authenticate', 'Basic realm="' . check_plain(variable_get('site_name'), 'Backdrop') . '"');
   }
   elseif ($error['code'] == 403 && user_is_anonymous()) {
     // The user has not yet authenticated, so we should return a 401 status
@@ -37,6 +37,6 @@ function services_basic_auth_rest_server_execute_errors_alter(&$error, $controll
     // @see https://www.drupal.org/node/2158563
     $error['code'] = 401;
     $error['header_message'] = '401 Unauthorized';
-    drupal_add_http_header('WWW-Authenticate', 'Basic realm="' . check_plain(variable_get('site_name'), 'Drupal') . '"');
+    backdrop_add_http_header('WWW-Authenticate', 'Basic realm="' . check_plain(variable_get('site_name'), 'Backdrop') . '"');
   }
 }
